@@ -1,34 +1,45 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { Component } from 'react';
 import './App.css';
+import CardList from './components/card-list/CardList';
+import SearchBox from './components/search-box/SearchBox';
 
-function App() {
-  const [count, setCount] = useState(0);
+class App extends Component {
+  constructor() {
+    super();
 
-  return (
-    <div className='App'>
+    this.state = {
+      monsters: [],
+      searchField: '',
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => this.setState(() => ({ monsters: users })));
+  }
+
+  onSearchChange = e => {
+    const searchField = e.target.value.toLowerCase();
+    this.setState(() => ({ searchField }));
+  };
+
+  render() {
+    const { monsters, searchField } = this.state;
+    const { onSearchChange } = this;
+
+    const filteredMonsters = monsters.filter(monster => {
+      return monster.name.toLowerCase().includes(searchField);
+    });
+
+    return (
       <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src='/vite.svg' className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://reactjs.org' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
+        <h1 className='app-title'>Monsters Rolodex</h1>
+        <SearchBox onChangeHandler={onSearchChange} />
+        <CardList filteredMonsters={filteredMonsters} />
       </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount(count => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
