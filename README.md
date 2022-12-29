@@ -37,38 +37,47 @@ It's a React Functional Component project with search and filter functionality.
 - Creating a React App with Vite
 - Using Functional Components
 - When React renders and re-renders in Functional Components
-- Managing state within a component using useState Hook
-- Handling side-effects with useEffect Hook
-- Filtering a state inside useEffect Hook
+- Managing state within a component using useState hook
+- Handling side-effects with useEffect hook
+- Filtering a state inside useEffect hook
 - Mapping arrays to elements
-- Using keys Within mapped elements
+- Using keys within mapped elements
 - Passing destructured props to a component
 
 Here is a code snippet:
 
 ```App.jsx
-      ...
-class App extends Component {
-  constructor() {
-    super();
+const App = () => {
+  const [monsters, setMonsters] = useState([]);
+  const [searchField, setSearchField] = useState('');
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
-    this.state = {
-      monsters: [],
-      searchField: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(users => this.setState(() => ({ monsters: users })));
-  }
-  ...
+      .then(users => {
+        setMonsters(users);
+      })
+      .catch(err => console.log(err.message));
+  }, []);
+
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter(monster => {
+      return monster.name.toLowerCase().includes(searchField);
+    });
+
+    setFilteredMonsters(newFilteredMonsters);
+  }, [monsters, filteredMonsters]);
+
+  const onSearchChange = e => {
+    const searchFieldString = e.target.value.toLowerCase();
+    setSearchField(searchFieldString);
+  };
 ```
 
 ### Useful resources
 
-- [React Docs (Handling Side Effects) ](https://beta.reactjs.org/reference/react/useEffect) - This helped me for knowing fetching data and avoiding infinite re-rendering in React.
+- [React Docs (Handling Side Effects) ](https://beta.reactjs.org/reference/react/useEffect) - This helped me for fetching data and avoiding infinite re-rendering in React.
 - [React Docs (Lists and Keys)](https://reactjs.org/docs/lists-and-keys.html) - This helped me for mapping arrays to elements and adding keys.
 
 ## Author
