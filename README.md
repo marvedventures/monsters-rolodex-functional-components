@@ -47,7 +47,6 @@ It's a React Functional Component project with search and filter functionality.
 Here is a code snippet:
 
 ```App.jsx
-      ...
 const App = () => {
   const [monsters, setMonsters] = useState([]);
   const [searchField, setSearchField] = useState('');
@@ -74,7 +73,6 @@ const App = () => {
     const searchFieldString = e.target.value.toLowerCase();
     setSearchField(searchFieldString);
   };
-  ...
 ```
 
 ### Useful resources
