@@ -77,7 +77,7 @@ const App = () => {
 
 ### Useful resources
 
-- [React Docs (Handling Side Effects) ](https://beta.reactjs.org/reference/react/useEffect) - This helped me for knowing fetching data and avoiding infinite re-rendering in React.
+- [React Docs (Handling Side Effects) ](https://beta.reactjs.org/reference/react/useEffect) - This helped me for fetching data and avoiding infinite re-rendering in React.
 - [React Docs (Lists and Keys)](https://reactjs.org/docs/lists-and-keys.html) - This helped me for mapping arrays to elements and adding keys.
 
 ## Author
