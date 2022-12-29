@@ -3,8 +3,7 @@ import './App.css';
 import CardList from './components/card-list/CardList';
 import SearchBox from './components/search-box/SearchBox';
 
-function App() {
-  console.log('render');
+const App = () => {
   const [monsters, setMonsters] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
@@ -42,6 +41,6 @@ function App() {
       <CardList filteredMonsters={filteredMonsters} />
     </div>
   );
-}
+};
 
 export default App;
