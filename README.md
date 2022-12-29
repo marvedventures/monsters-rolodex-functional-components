@@ -67,7 +67,7 @@ const App = () => {
     });
 
     setFilteredMonsters(newFilteredMonsters);
-  }, [monsters, filteredMonsters]);
+  }, [monsters, searchField]);
 
   const onSearchChange = e => {
     const searchFieldString = e.target.value.toLowerCase();
