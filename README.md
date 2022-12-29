@@ -48,21 +48,32 @@ Here is a code snippet:
 
 ```App.jsx
       ...
-class App extends Component {
-  constructor() {
-    super();
+const App = () => {
+  const [monsters, setMonsters] = useState([]);
+  const [searchField, setSearchField] = useState('');
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
-    this.state = {
-      monsters: [],
-      searchField: '',
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(users => this.setState(() => ({ monsters: users })));
-  }
+      .then(users => {
+        setMonsters(users);
+      })
+      .catch(err => console.log(err.message));
+  }, []);
+
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter(monster => {
+      return monster.name.toLowerCase().includes(searchField);
+    });
+
+    setFilteredMonsters(newFilteredMonsters);
+  }, [monsters, filteredMonsters]);
+
+  const onSearchChange = e => {
+    const searchFieldString = e.target.value.toLowerCase();
+    setSearchField(searchFieldString);
+  };
   ...
 ```
 
