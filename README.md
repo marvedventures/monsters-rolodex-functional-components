@@ -37,11 +37,11 @@ It's a React Functional Component project with search and filter functionality.
 - Creating a React App with Vite
 - Using Functional Components
 - When React renders and re-renders in Functional Components
-- Managing state within a component using useState Hook
-- Handling side-effects with useEffect Hook
-- Filtering a state inside useEffect Hook
+- Managing state within a component using useState hook
+- Handling side-effects with useEffect hook
+- Filtering a state inside useEffect hook
 - Mapping arrays to elements
-- Using keys Within mapped elements
+- Using keys within mapped elements
 - Passing destructured props to a component
 
 Here is a code snippet:
